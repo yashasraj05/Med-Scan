@@ -5,7 +5,10 @@ const apiKey = process.env.GOOGLE_API_KEY || "";
 // We don't throw immediately to allow build to pass. 
 // The check will happen when genAI is used.
 
-const genAI = new GoogleGenerativeAI(apiKey);
+// Initialize lazily or check inside function to avoid build-time errors
+const genAI = new GoogleGenerativeAI(apiKey || "DUMMY_KEY_FOR_BUILD");
+// Note: "DUMMY_KEY_FOR_BUILD" allows new GoogleGenerativeAI() to succeed during build time
+// but will fail at runtime if the real key is missing.
 
 export const modelNames = [
     "gemini-1.5-pro",
