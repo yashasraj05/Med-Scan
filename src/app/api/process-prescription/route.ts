@@ -1,9 +1,7 @@
 import { NextResponse } from "next/server";
 import sharp from "sharp";
 import { processWithGemini, extractJSON } from "@/lib/gemini";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import prisma from "@/lib/prisma";
 
 export async function POST(req: Request) {
     try {
